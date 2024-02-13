@@ -1,0 +1,82 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+{%if not request.user.is_authenticated%}
+
+<style>
+    /* Existing styles */
+    .form-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        padding: 40px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        background-color: white;
+        font-size: 18px;
+    }
+    input[type="text"], input[type="password"] {
+        width: calc(100% - 24px);
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    button[type="submit"], button.login-button { /* Apply styles to the new login button as well */
+        width: 100%;
+        padding: 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        text-align: center;
+        display: block;
+        margin-top: 20px; /* Space above the login button */
+    }
+    button[type="submit"]:hover, button.login-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="form-container">
+    <h2 style="text-align: center;">Sign Up</h2>
+    <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            {% if form.username.errors %}
+            <div class="error">{{ form.username.errors.as_text }}</div>
+        {% endif %}
+        </div>
+        <div>
+            <label for="password1">Password:</label>
+            <input type="password" id="password1" name="password1" required>
+        </div>
+        <div>
+            <label for="password2">Repeat Password:</label>
+            <input type="password" id="password2" name="password2" required>
+            {%if form.errors%}
+                {%for field in form%}
+                    {%for error in field.errors%}
+                    <div>
+                        <p>{{error}}</p>
+                        
+                    </div>
+
+                    {%endfor%}
+                {% endfor %}
+            {%endif%}
+        </div>
+        <button type="submit">Sign up</button>
+    </form>
+    <!-- Button for users who already have an account (non-functional until further implementation) -->
+    <button class="login-button bg-blue-500" disabled>Click here if you have an account</button>
+</div>
+{%endif%}
+{% endblock content %}

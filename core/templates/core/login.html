@@ -1,0 +1,72 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+{%if not request.user.is_authenticated%}
+<style>
+    /* Existing styles */
+    .form-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        padding: 40px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        background-color: white;
+        font-size: 18px;
+    }
+    input[type="text"], input[type="password"] {
+        width: calc(100% - 24px);
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    button[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        text-align: center;
+        display: block;
+        margin-top: 20px;
+    }
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="form-container">
+    <h2 style="text-align: center;">Log In</h2>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        {% if form.non_field_errors %}
+            <div class="error">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <button type="submit">Log in</button>
+    </form>
+    <!-- Link for users who do not have an account yet -->
+    <div class="mt-4">
+        <a href="{% url 'signup' %}" class="text-xl text-white bg-blue-500 hover:bg-green-600 px-4 py-2 rounded">Sign Up</a>
+    </div>
+</div>
+{%endif%}
+{% endblock content %}

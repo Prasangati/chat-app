@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Rooms | {% endblock %}
+
+{% block content %}
+<div class="p-10 lg:p-20 text-center">
+    <h1 class="text-3xl lg:text-6xl text-gray-600">Discover Our Rooms</h1>
+</div>
+
+<div class="w-full flex flex-wrap items-center justify-center">
+    {% for room in rooms %}
+        <div class="w-full md:w-1/2 lg:w-1/4 px-4 py-4">
+            <div class="p-6 bg-white shadow-lg rounded-xl text-center hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <h2 class="mb-4 text-2xl font-semibold text-gray-800">{{ room.name }}</h2>
+                <p class="mb-5 text-gray-600">Join and start the conversation!</p>
+                <a href="{%url 'room' room.slug%}" class="px-6 py-3 inline-block rounded-xl text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-opacity-50 transition-colors duration-200">Join Room</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
