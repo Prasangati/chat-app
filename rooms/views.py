@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from .models import Room
+from .models import Room,Message
 # Create your views here.
 @login_required
 def rooms(request):
@@ -10,4 +10,5 @@ def rooms(request):
 @login_required
 def room(request, slug):
     room = Room.objects.get(slug=slug)
-    return render(request, 'rooms/room.html',{'room':room})
+    messages = Message.objects.filter(room=room).order_by('-date_added')[0:20][::-1]
+    return render(request, 'rooms/room.html',{'room':room,'messages':messages})
