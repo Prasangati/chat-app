@@ -1,3 +1,46 @@
 {% extends "core/base.html" %}
 
-{% block content %}{% endblock content %}
+{% load static %}  <!-- Load static to use static files -->
+
+{% block content %}
+    <div class="container mx-auto mt-4 py-12 px-4"> <!-- Reduced top margin from mt-12 to mt-4 -->
+        <div class="flex flex-wrap justify-center items-center">
+            <!-- About Section with Larger Elements and Centered Content -->
+            <div class="w-full lg:w-2/3 px-4 mb-8 bg-white rounded-lg shadow-xl opacity-95">
+                <div class="text-center py-8">
+                    <img src="{% static 'core/images/profile.jpg' %}" alt="Your Name" class="rounded-box w-50 m-5 mx-auto" style="max-width: 250px; border-radius: 20px;">
+                    <h2 class="text-4xl font-bold mt-4">Prasanga Tiwari</h2>
+                    <p class="mt-4 text-xl">
+                        Hey! I am a CS student at Hunter College with an interest in web development. 
+                        I am especially interested in learning more about backend technologies. I created this website to learn the inner workings of the Django framework. 
+                        It is a simple chat site that utilizes a websocket connection using Django Channels and vanilla Js. Tailwind CSS is also utilized.
+                    </p>
+                    <p class="mt-4 text-xl">
+                        The choice to start one's web development journey with Django is an interesting one. Most colleges and coding bootcamps seem to 
+                        focus on Javscript frameworks such as Express.js, despite the fact that Django remains an incredibly popular framework among developers. 
+                        Due to my previous Python knowledge—and perhaps my desire to be a contrarian—I decided to step my foot forward with Django.
+                        
+                    </p>
+                </div>
+                <div class="text-center pb-8">
+                    <h3 class="text-3xl font-bold">Future Plans</h3>
+                    <p class="mt-4 text-xl">
+                        I want the user to be able to use their Google account to sign up and log in.
+                        I also want to utilize WebRTC API to enable video calls. Furthermore, I want to 
+                        learn React to implement advanced features. 
+                    </p>
+                </div>
+            </div>
+
+            <!-- Enhanced Buttons Section -->
+            <div class="w-full lg:w-1/3 px-4 flex flex-col items-center justify-start mt-8 lg:mt-0">
+                <a href="{% url 'login' %}" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-8 px-20 rounded-lg mb-4 text-3xl transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg">
+                    Log In
+                </a>
+                <a href="{% url 'signup' %}" class="bg-green-600 hover:bg-green-800 text-white font-bold py-8 px-20 rounded-lg text-3xl transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg">
+                    Sign Up
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
