@@ -4,120 +4,25 @@
 
 {% block content %}
 <div class="p-10 lg:p-20 text-center">
-    <h1 class="text-3xl lg:text-6xl text-gray-600">{{room.name}}</h1>
-</div>{% extends 'core/base.html' %}
-
-{% block title %}{{ room.name }} |{% endblock %}
-
-{% block content %}
-<div class="p-10 lg:p-20 text-center">
-    <h1 class="text-3xl lg:text-6xl text-gray-600">{{room.name}}</h1>
+    <h1 class="text-3xl lg:text-6xl text-gray-800 font-bold">{{ room.name }}</h1>
 </div>
 
-<div class = "lg:w-2/4 mx-4 lg:mx-auto p-4 bg-white rounded-xl">
-    <div class = "chat-messages space-y-3" id="chat-messages">
-                {% for m in messages %}<b>{{ m.user.username }}</b>: {{ m.content }}<br>{% endfor %}
+<div class="lg:w-2/4 mx-4 lg:mx-auto p-6 bg-white rounded-xl shadow-lg">
+    <div class="chat-messages space-y-3 p-3" id="chat-messages" style="max-height: 500px; overflow-y: auto;">
+        {% for m in messages %}<div class="p-2 bg-gray-100 rounded-lg"><b>{{ m.user.username }}</b>: {{ m.content }}</div>{% endfor %}
     </div>
 </div>
 
-<div class="lg:w-2/4 mt-6 mx-4 lg:mx-auto p-4 bg-white rounded-xl">
-    <form method="post" action="." class="flex">
-        <input type="text" name="content" class="flex-1 mr-3" placeholder="Your message..." id="chat-message-input">
-
-        <button
-            class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700"
-            id="chat-message-submit"
-        >Submit</button>
+<div class="lg:w-2/4 mt-6 mx-4 lg:mx-auto p-6 bg-white rounded-xl shadow-lg">
+    <form method="post" action="." class="flex items-center">
+        <input type="text" name="content" class="flex-1 p-4 mr-3 rounded-xl border-2 border-gray-300" placeholder="Your message..." id="chat-message-input">
+        <button class="px-5 py-3 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition ease-in-out duration-150" id="chat-message-submit">Submit</button>
     </form>
 </div>
-    {% endblock %}
-
-{% block scripts %}
-    {{ room.slug|json_script:"json-roomname" }}
-    {{ request.user.username|json_script:"json-username" }}
-<script>
-    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
-    const userName = JSON.parse(document.getElementById('json-username').textContent);
-    const chatSocket = new WebSocket(
-        'ws://'
-        + window.location.host
-        + '/ws/'
-        + roomName
-        + '/'
-    );
-
-
-    chatSocket.onmessage = function(e) {
-        console.log('onmessage')
-        const data = JSON.parse(e.data);
-        if (data.message){
-            let html = '<div class="p-4 bg-gray-200 rounded-xl">';
-                html += '<p class = "font-semibold">'+data.username+'</p>';
-                html += '<p>'+data.message+ '</p>'
-            document.querySelector('#chat-messages').innerHTML+=html;
-
-
-        }else{
-            alert('The messesage was empty')
-        }
-        scrollToBottom();
-    }
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {
-            document.querySelector('#chat-message-submit').click();
-        }
-    };
-
-
-    chatSocket.onclose = function(e) {
-        console.log('onclose')
-    }
-
-    //
-    document.querySelector('#chat-message-submit').onclick = function (e){
-        e.preventDefault()
-        const messageInputDom = document.querySelector('#chat-message-input');
-        const message = messageInputDom.value;
-
-        chatSocket.send(JSON.stringify({
-            'message': message,
-            'username': userName,
-            'room': roomName
-        }));
-        messageInputDom.value = '';
-        return false;
-    }
-
-    function scrollToBottom(){
-        const objDiv = document.querySelector('#chat-messages');
-        objDiv.scrollTop = objDiv.scrollHeight;
-    }
-    scrollToBottom();
-
-
-
-</script>
 {% endblock %}
 
-<div class = "lg:w-2/4 mx-4 lg:mx-auto p-4 bg-white rounded-xl">
-    <div class = "chat-messages space-y-3" id="chat-messages">
-                {% for m in messages %}<b>{{ m.user.username }}</b>: {{ m.content }}<br>{% endfor %}
-    </div>
-</div>
 
-<div class="lg:w-2/4 mt-6 mx-4 lg:mx-auto p-4 bg-white rounded-xl">
-    <form method="post" action="." class="flex">
-        <input type="text" name="content" class="flex-1 mr-3" placeholder="Your message..." id="chat-message-input">
 
-        <button
-            class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700"
-            id="chat-message-submit"
-        >Submit</button>
-    </form>
-</div>
-    {% endblock %}
 
 {% block scripts %}
     {{ room.slug|json_script:"json-roomname" }}
@@ -145,7 +50,7 @@
 
 
         }else{
-            alert('The messesage was empty')
+           
         }
         scrollToBottom();
     }
@@ -182,8 +87,5 @@
         objDiv.scrollTop = objDiv.scrollHeight;
     }
     scrollToBottom();
-
-
-
 </script>
 {% endblock %}
