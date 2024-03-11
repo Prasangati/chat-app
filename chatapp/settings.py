@@ -94,7 +94,7 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
 'default': dj_database_url.config(
-    default='postgres://prasanga:3w4Rpg8XVyQ9YuUUWtsEMquwpMuAt3La@dpg-cnn7a2g21fec739a7vng-a/dbname_tjiv',
+    default='postgres://...',
     conn_max_age=600
 )
 }
