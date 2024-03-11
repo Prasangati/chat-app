@@ -94,7 +94,7 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
 'default': dj_database_url.config(
-    default='postgres://...,
+    default='postgres://...',
     conn_max_age=600
 )
 }
