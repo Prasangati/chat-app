@@ -76,7 +76,7 @@
         <button type="submit">Sign up</button>
     </form>
     <!-- Button for users who already have an account (non-functional until further implementation) -->
-    <button class="login-button bg-blue-500" disabled>Click here if you have an account</button>
+    <a href="{% url 'login' %}"><button class="login-button bg-blue-500" >Click here if you have an account</button></a>
 </div>
 {%endif%}
 {% endblock content %}
