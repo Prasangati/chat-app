@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i)*(7+1mk0&^(u$(_qnqt^xkru^h8*at@9+cr+-ei53z1zmy8^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -94,7 +94,7 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
 'default': dj_database_url.config(
-    default='postgres://prasanga:3w4Rpg8XVyQ9YuUUWtsEMquwpMuAt3La@dpg-cnn7a2g21fec739a7vng-a.oregon-postgres.render.com/dbname_tjiv',
+    default='postgres://prasanga:3w4Rpg8XVyQ9YuUUWtsEMquwpMuAt3La@dpg-cnn7a2g21fec739a7vng-a/dbname_tjiv',
     conn_max_age=600
 )
 }
