@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-i)*(7+1mk0&^(u$(_qnqt^xkru^h8*at@9+cr+-ei53z1zmy8^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['chat-app-alnz.onrender.com', 'www.chat-app-alnz.onrender.com']
 
 LOGOUT_REDIRECT_URL = '/signin'
 LOGIN_REDIRECT_URL = '/rooms/'
