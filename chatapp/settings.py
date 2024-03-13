@@ -79,11 +79,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chatapp.wsgi.application'
 ASGI_APPLICATION = 'chatapp.asgi.application'
 
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
+
 CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("redis://red-cnn74gfjbltc738derk0:6379", 6379)],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [REDIS_URL],
         },
     },
 }
