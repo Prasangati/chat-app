@@ -35,7 +35,7 @@ LOGIN_REDIRECT_URL = '/rooms/'
 LOGIN_URL = '/login/'
 
 
-
+#work
 # Application definition
 
 INSTALLED_APPS = [
