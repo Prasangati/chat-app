@@ -90,7 +90,6 @@ CHANNEL_LAYERS = {
         'CONFIG': {
             "hosts": [REDIS_URL],
         },
-        "ROUTING":"chatapp.routing.websocket_urlpatterns",
     },
 }
 # Database
