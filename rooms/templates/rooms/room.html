@@ -14,11 +14,13 @@
 </div>
 
 <div class="lg:w-2/4 mt-6 mx-4 lg:mx-auto p-6 bg-white rounded-xl shadow-lg">
-    <form method="post" action="." class="flex items-center">
-            {% csrf_token %}
+    <!-- Adjust the form tag to include an id for easier targeting -->
+    <form method="post" action="." class="flex items-center" id="chat-form">
+        {% csrf_token %}
         <input type="text" name="content" class="flex-1 p-4 mr-3 rounded-xl border-2 border-gray-300" placeholder="Your message..." id="chat-message-input">
-        <button class="px-5 py-3 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition ease-in-out duration-150" id="chat-message-submit">Submit</button>
+        <button type="submit" class="px-5 py-3 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition ease-in-out duration-150" id="chat-message-submit">Submit</button>
     </form>
+
 </div>
 {% endblock %}
 
@@ -69,8 +71,8 @@
     }
 
     //
-    document.querySelector('#chat-message-submit').onclick = function (e){
-        e.preventDefault()
+    document.querySelector('#chat-form').onsubmit = function(e) {
+        e.preventDefault();
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
 
@@ -78,10 +80,12 @@
             'message': message,
             'username': userName,
             'room': roomName
-        }));
+    }));
+
         messageInputDom.value = '';
-        return false;
-    }
+        return false; // Prevent the form from submitting in the traditional way
+    };
+
 
     function scrollToBottom(){
         const objDiv = document.querySelector('#chat-messages');
