@@ -28,6 +28,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['chat-app-alnz.onrender.com', 'www.chat-app-alnz.onrender.com']
 
+
+
 LOGOUT_REDIRECT_URL = '/signin'
 LOGIN_REDIRECT_URL = '/rooms/'
 LOGIN_URL = '/login/'
@@ -95,11 +97,14 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-
-
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
-}
+if DEBUG:
+    DATABASES = {
+        'default': dj_database_url.parse('postgres://chatstuff_user:oAWH3cx7KvrRqHTQgDZ89vr5Sst6OLzt@dpg-cnojskgl6cac7399ko4g-a.ohio-postgres.render.com/chatstuff')
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),
+    }
 
 
 

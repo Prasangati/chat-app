@@ -33,7 +33,10 @@
 <script>
     const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
     const userName = JSON.parse(document.getElementById('json-username').textContent);
-    const wsStart = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    let wsStart = "ws://";
+        if (window.location.protocol == "https:") {
+        wsStart = "wss://";
+        }
     const chatSocket = new WebSocket(
         wsStart
         + window.location.host
