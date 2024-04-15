@@ -13,6 +13,7 @@ import dj_database_url
 from pathlib import Path
 import os
 import redis
+from channels.layers import InMemoryChannelLayer
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,15 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i)*(7+1mk0&^(u$(_qnqt^xkru^h8*at@9+cr+-ei53z1zmy8^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['chat-app-alnz.onrender.com', 'www.chat-app-alnz.onrender.com']
+ALLOWED_HOSTS = ['chat-app-alnz.onrender.com', 'www.chat-app-alnz.onrender.com','localhost','127.0.0.1']
 
 
 
-LOGOUT_REDIRECT_URL = '/signin'
-LOGIN_REDIRECT_URL = '/rooms/'
-LOGIN_URL = '/login/'
+
 
 
 #work
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'social_django',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -49,6 +49,20 @@ INSTALLED_APPS = [
     'channels',
     'rooms'
 ]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '244065955450-e7o0ccegccc4sj8k5ng3h2vfht0hddm7.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+LOGOUT_REDIRECT_URL = '/signin'
+LOGIN_REDIRECT_URL = '/rooms/'
+LOGIN_URL = '/login/'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'chatapp.urls'
 
@@ -74,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -82,16 +98,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'chatapp.wsgi.application'
 ASGI_APPLICATION = 'chatapp.asgi.application'
 
-REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
-
+# In your settings.py for Django Channels
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
         'CONFIG': {
-            "hosts": [REDIS_URL],
+            'allowed_hosts': ['localhost', '127.0.0.1', 'localhost:8000'],
         },
     },
 }
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
