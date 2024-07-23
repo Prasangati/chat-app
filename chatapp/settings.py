@@ -108,7 +108,7 @@ else:
 
 
 
-# This production code might break development mode, so we check whether we're in DEBUG mode
+# This production code might break development mode, so we check whether we're in DEBUG mode. hope this works
 if not DEBUG:
     # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
