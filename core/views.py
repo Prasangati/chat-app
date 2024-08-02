@@ -20,7 +20,7 @@ def enquiry_view(request):
                 f'Enquiry from {name}',
                 message,
                 email,
-                ['your_email@example.com'],  # Replace with your email
+                ['prasangahere@gmail.com'],  # Replace with your email
             )
 
             return redirect('mainpage')
