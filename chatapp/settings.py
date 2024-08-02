@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-i)*(7+1mk0&^(u$(_qnqt^xkru^h8*at@9+cr+-ei53z1zmy8^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['chat-app-alnz.onrender.com', 'www.chat-app-alnz.onrender.com']
+if not DEBUG:
+    ALLOWED_HOSTS = ['chat-app-alnz.onrender.com', 'www.chat-app-alnz.onrender.com']
+else:
+    ALLOWED_HOSTS = ['127.0.0.1']
 
 
 
@@ -98,7 +101,7 @@ CHANNEL_LAYERS = {
 
 if DEBUG:
     DATABASES = {
-        'default': dj_database_url.parse('postgres://chatstuff_user:oAWH3cx7KvrRqHTQgDZ89vr5Sst6OLzt@dpg-cnojskgl6cac7399ko4g-a.ohio-postgres.render.com/chatstuff')
+        'default': dj_database_url.parse('postgresql://for_chat_user:sDMekM0xV8rURtXHNcBEsQ4x2UAo0H8k@dpg-cqltle5ds78s73ac77fg-a.ohio-postgres.render.com/for_chat')
     }
 else:
     DATABASES = {
@@ -157,5 +160,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+
+
 
 

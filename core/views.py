@@ -1,10 +1,33 @@
 from django.contrib.auth import login,logout
 from django.shortcuts import render, redirect
-from .forms import SignUpForm
+from django.core.mail import send_mail
+from .forms import SignUpForm, EnquiryForm
 
 # Create your views here.
 def mainpage(request):
     return render(request, 'core/front.html')
+
+
+def enquiry_view(request):
+    if request.method == 'POST':
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+
+            send_mail(
+                f'Enquiry from {name}',
+                message,
+                email,
+                ['your_email@example.com'],  # Replace with your email
+            )
+
+            return redirect('mainpage')
+    else:
+        form = EnquiryForm()
+    return render(request, 'core/about.html', {'form': form})
+
 
 def signup(request):
     if request.method == 'POST':

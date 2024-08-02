@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+
+{% load static %}  <!-- Load static to use static files -->
+
+{% block content %}
+    <div class="container mx-auto mt-4 py-12 px-4"> <!-- Reduced top margin from mt-12 to mt-4 -->
+        <div class="flex flex-wrap justify-center items-center">
+            <!-- About Section with Larger Elements and Centered Content -->
+            <div class="w-full lg:w-2/3 px-4 mb-8 bg-white rounded-lg shadow-xl opacity-95">
+                <div class="text-center py-8">
+                    <img src="{% static 'core/images/profile.jpeg' %}" alt="Your Name" class="rounded-box w-45 m-5 mx-auto" style="max-width: 250px; border-radius: 20px;">
+                    <h2 class="text-3xl font-bold mt-4">Prasanga Tiwari</h2>
+                    <p class="mt-4 text-lg">
+                        Hey! I am a CS student at Hunter College with an interest in web development. 
+                        I am especially interested in learning more about backend technologies. I created this website to learn the inner workings of the Django framework.
+                    </p>
+                    <p class="mt-4 text-lg">
+                        There are various
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- New Form Section -->
+        <div class="flex flex-wrap justify-center items-center mt-8">
+            <div class="w-full lg:w-2/3 px-4 mb-8 bg-white rounded-lg shadow-xl opacity-95">
+                <div class="text-center py-8">
+                    <h2 class="text-3xl font-bold mt-4">Contact Me</h2>
+                    <form method="post" action="{% url 'about_enquiry' %}" class="mt-8">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="name" class="block text-lg font-medium mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full p-3 border-4 border-gray-300 rounded-lg text-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-lg font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 border-4 border-gray-300 rounded-lg text-lg" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-lg font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" class="w-full p-3 border-4 border-gray-300 rounded-lg text-lg" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg">
+                            Submit
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
