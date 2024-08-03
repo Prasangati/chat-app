@@ -27,15 +27,18 @@ def about_enquiry_view(request):
                     fail_silently=False,
                 )
                 messages.success(request, 'Email sent successfully.')
-                return redirect('mainpage')
+                return redirect('about_enquiry')
             except BadHeaderError:
                 messages.error(request, 'Invalid header found.')
             except Exception as e:
-                messages.error(request, f'An error occurred: {e}')
+                messages.error(request, f'An error occurred: {str(e)}')
+        else:
+            messages.error(request, 'Form is not valid. Please correct the errors below.')
     else:
         form = EnquiryForm()
 
     return render(request, 'core/about.html', {'form': form})
+
 
 def signup(request):
     if request.method == 'POST':
