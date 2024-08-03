@@ -1,14 +1,16 @@
 from django.contrib.auth import login,logout
+from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from .forms import SignUpForm, EnquiryForm
+
 
 # Create your views here.
 def mainpage(request):
     return render(request, 'core/front.html')
 
 
-def enquiry_view(request):
+def about_enquiry_view(request):
     if request.method == 'POST':
         form = EnquiryForm(request.POST)
         if form.is_valid():
@@ -16,18 +18,24 @@ def enquiry_view(request):
             email = form.cleaned_data['email']
             message = form.cleaned_data['message']
 
-            send_mail(
-                f'Enquiry from {name}',
-                message,
-                email,
-                ['prasangahere@gmail.com'],  # Replace with your email
-            )
-
-            return redirect('mainpage')
+            try:
+                send_mail(
+                    subject=f'Enquiry from {name}',
+                    message=message,
+                    from_email=email,
+                    recipient_list=['prasangahere@gmail.com'],  # Replace with your email
+                    fail_silently=False,
+                )
+                messages.success(request, 'Email sent successfully.')
+                return redirect('mainpage')
+            except BadHeaderError:
+                messages.error(request, 'Invalid header found.')
+            except Exception as e:
+                messages.error(request, f'An error occurred: {e}')
     else:
         form = EnquiryForm()
-    return render(request, 'core/about.html', {'form': form})
 
+    return render(request, 'core/about.html', {'form': form})
 
 def signup(request):
     if request.method == 'POST':
