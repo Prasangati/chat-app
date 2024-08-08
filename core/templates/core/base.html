@@ -14,9 +14,9 @@
         
     </style>
   </head>
-  <body class="min-h-screen bg-gray-300">
+  <body class="min-h-screen bg-gradient-to-r from-blue-500 to-teal-500">
     <header>
-        <nav class="flex items-center justify-between px-4 py-6 bg-white text-gray-800 shadow-lg"> <!-- Enhanced navbar appearance -->
+        <nav class="flex items-center justify-between px-4 py-6 bg-blue-800 text-white shadow-lg"> <!-- Enhanced navbar appearance -->
             <div>
               {% if request.user.is_authenticated %}
                   <a href="/" class="bg-blue-600 hover:bg-blue-800 text-white font-bold text-3xl px-5 py-3 rounded transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg">Mouth Open Words</a>
