@@ -60,3 +60,6 @@ def custom_logout_view(request):
 
 def rooms(request):
     return render(request, 'core/rooms.html')
+
+def chats(request):
+    return render(request, 'core/chat.html')
