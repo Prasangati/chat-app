@@ -27,7 +27,7 @@
 
             <div>
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'rooms' %}" class="text-xl bg-blue-500 hover:bg-green-700 px-4 py-2 rounded transition duration-300 ease-in-out">Rooms</a> <!-- Harmonized hover effect -->
+                <a href="{% url 'chats' %}" class="text-xl bg-blue-500 hover:bg-green-700 px-4 py-2 rounded transition duration-300 ease-in-out">Chat</a> <!-- Harmonized hover effect -->
                 <a href="{% url 'logout' %}" class="text-xl bg-blue-500 hover:bg-red-600 px-4 py-2 rounded transition duration-300 ease-in-out ml-4">Log Out</a> <!-- Added logout button color change on hover for visual feedback -->
                 {% endif %}
             </div>

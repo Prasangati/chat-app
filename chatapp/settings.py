@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'channels',
-    'rooms'
+    'rooms',
+    'random_chat',
 ]
 
 

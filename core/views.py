@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
 from .forms import SignUpForm, EnquiryForm
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def mainpage(request):
@@ -61,5 +61,6 @@ def custom_logout_view(request):
 def rooms(request):
     return render(request, 'core/rooms.html')
 
+@login_required
 def chats(request):
     return render(request, 'core/chat.html')
