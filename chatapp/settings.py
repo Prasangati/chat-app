@@ -111,7 +111,7 @@ CHANNEL_LAYERS = {
 
 if DEBUG:
     DATABASES = {
-        'default': dj_database_url.parse('postgresql://for_chat_user:sDMekM0xV8rURtXHNcBEsQ4x2UAo0H8k@dpg-cqltle5ds78s73ac77fg-a.ohio-postgres.render.com/for_chat')
+        'default': dj_database_url.parse('postgresql://idk_tsyf_user:2sDdmcUalnOnLLGoLY1HIH0g9bDB7qyg@dpg-cs83q95umphs73fvqg10-a.ohio-postgres.render.com/idk_tsyf')
     }
 else:
     DATABASES = {
