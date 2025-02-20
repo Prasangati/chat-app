@@ -20,5 +20,5 @@ import os
 
 urlpatterns = [
     path('',include('core.urls')),
-    path(os.environ.get('DATABASE_URL'), admin.site.urls),
+    path(os.environ.get('adminlink'), admin.site.urls),
 ]
