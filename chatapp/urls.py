@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+import os
 
 urlpatterns = [
     path('',include('core.urls')),
-    path('dsnfklsfldsnfladsnndflkdkdknk/', admin.site.urls),
+    path(os.environ.get('DATABASE_URL'), admin.site.urls),
 ]
-""" path('rooms/', include('rooms.urls')),"""

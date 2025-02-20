@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# Distribution / packaging
+.eggs/
+*.egg
+develop-eggs/
+dist/
+build/
+eggs/
+parts/
+wheels/
+*.whl
+*.zip
+sdist/
+*.manifest
+*.spec
+*.log
+*.tmp
+tmp/
+
+# Django specific
+*.sqlite3
+*.sqlite3-journal
+instance/
+media/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# VS Code
+.vscode/
+
+# PyCharm
+*.iml
+
+# Static files
+static/
