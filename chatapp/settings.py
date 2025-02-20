@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-i)*(7+1mk0&^(u$(_qnqt^xkru^h8*at@9+cr+-ei53z1zmy8^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 if not DEBUG:
     ALLOWED_HOSTS = ['chat-app-alnz.onrender.com', 'www.chat-app-alnz.onrender.com']
@@ -111,7 +111,7 @@ CHANNEL_LAYERS = {
 
 if DEBUG:
     DATABASES = {
-        'default': dj_database_url.parse('postgresql://idk_tsyf_user:2sDdmcUalnOnLLGoLY1HIH0g9bDB7qyg@dpg-cs83q95umphs73fvqg10-a.ohio-postgres.render.com/idk_tsyf')
+        'default': dj_database_url.parse('ok')
     }
 else:
     DATABASES = {
