@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
 from .forms import SignUpForm, EnquiryForm
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 # Create your views here.
 def mainpage(request):
     return render(request, 'core/front.html')
@@ -41,6 +41,9 @@ def about_enquiry_view(request):
 
 
 def signup(request):
+    if User.is_authenticated:
+        return redirect('mainpage')
+
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         
@@ -58,6 +61,7 @@ def custom_logout_view(request):
     logout(request)  # This should clear the session
     return redirect('mainpage')  # Adjust the redirect as needed
 
+@login_required
 def rooms(request):
     return render(request, 'core/rooms.html')
 
